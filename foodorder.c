@@ -3,7 +3,9 @@
 #include<windows.h>
 
 char ccois[10];
-int cnv,quantity,cois,cvg,stf;
+int cnv,quantity,cois,cvg,stf,price;
+#define MAX_ITEMS 100
+
 FILE *empid,*f;
 FILE *order,*r;
 FILE *dlt;
@@ -66,12 +68,14 @@ enum pilih stringtonum(const char *input){
 
 };
 
-
 struct contact
 {
     char nama[50],lastnam[50],add[50],landmark[50],phone[50];
     int sum;
     char tiperdr[30];
+    char mennu[MAX_ITEMS][100];
+    int totalitem;
+
 }cd;
 
 struct employid
@@ -116,6 +120,7 @@ void customer(){
     system("cls");
 
     cd.sum = 0;
+    cd.totalitem = 0;
     int ccus;
 
     divider();
@@ -194,7 +199,12 @@ void dchick(){
     printf("Quantity: ");
     scanf("%d", &quantity); getchar();
 
-    cd.sum += 150*quantity;
+    price = 150*quantity;
+    cd.sum += price;
+
+    sprintf(cd.mennu[cd.totalitem], "Dry Chicken X%d: Rp%d",quantity,price);
+    cd.totalitem++;
+
     adding();
     scanf("%d",&cois); getchar();
     switch (cois)
@@ -215,9 +225,14 @@ void dchick(){
 void gchick(){
     
     printf("Quantity: ");
-    scanf("%d", &quantity);
+    scanf("%d", &quantity); getchar();
 
-    cd.sum += 200*quantity;
+    price = 200*quantity;
+    cd.sum += price;
+
+    sprintf(cd.mennu[cd.totalitem], "Gravy Chicken X%d: Rp%d",quantity,price);
+    cd.totalitem++;
+
     adding();
     scanf("%d",&cois); getchar();
     switch (cois)
@@ -239,7 +254,12 @@ void cbriya(){
     printf("Quantity: ");
     scanf("%d", &quantity);
 
-    cd.sum += 110*quantity;
+    price = 110*quantity;
+    cd.sum += price;
+
+    sprintf(cd.mennu[cd.totalitem], "Chiken Briyani X%d: Rp%d",quantity,price);
+    cd.totalitem++;
+
     adding();
     scanf("%d",&cois); getchar();
     switch (cois)
@@ -261,7 +281,12 @@ void bever(){
     printf("Quantity: ");
     scanf("%d", &quantity); getchar();
 
-    cd.sum += 50*quantity;
+    price = 50*quantity;
+    cd.sum += price;
+
+    sprintf(cd.mennu[cd.totalitem], "Beverages Non vegetarian X%d: Rp%d",quantity,price);
+    cd.totalitem++;
+
     adding();
     scanf("%d",&cois); getchar();
     switch (cois)
@@ -332,7 +357,12 @@ void burger(){
     printf("Quantity: ");
     scanf("%d", &quantity); getchar();
 
-    cd.sum += 40*quantity;
+    price = 40*quantity;
+    cd.sum += price;
+
+    sprintf(cd.mennu[cd.totalitem], "Burger X%d: Rp%d",quantity,price);
+    cd.totalitem++;
+
     adding();
     scanf("%d",&cois); getchar();
     switch (cois)
@@ -355,7 +385,12 @@ void noodles(){
     printf("Quantity: ");
     scanf("%d", &quantity);
 
-    cd.sum += 60*quantity;
+    price = 60*quantity;
+    cd.sum += price;
+
+    sprintf(cd.mennu[cd.totalitem], "Noodles X%d: Rp%d",quantity,price);
+    cd.totalitem++;
+
     adding();
     scanf("%d",&cois); getchar();
     switch (cois)
@@ -377,7 +412,12 @@ void sandwich(){
     printf("Quantity: ");
     scanf("%d", &quantity);
 
-    cd.sum += 45*quantity;
+    price = 45*quantity;
+    cd.sum += price;
+
+    sprintf(cd.mennu[cd.totalitem], "Sandwich X%d: Rp%d",quantity,price);
+    cd.totalitem++;
+
     adding();
     scanf("%d",&cois); getchar();
     switch (cois)
@@ -399,7 +439,12 @@ void bever2(){
     printf("Quantity: ");
     scanf("%d", &quantity); getchar();
 
-    cd.sum += 35*quantity;
+    price = 35*quantity;
+    cd.sum += price;
+
+    sprintf(cd.mennu[cd.totalitem], "Beverages Vegetarian X%d: Rp%d",quantity,price);
+    cd.totalitem++;
+
     adding();
     scanf("%d",&cois); getchar();
     switch (cois)
@@ -422,7 +467,12 @@ void vegtal(){
     printf("Quantity: ");
     scanf("%d", &quantity); getchar();
 
-    cd.sum += 150*quantity;
+    price = 150*quantity;
+    cd.sum += price;
+
+    sprintf(cd.mennu[cd.totalitem], "Veg Thaali X%d: Rp%d",quantity,price);
+    cd.totalitem++;
+
     adding();
     scanf("%d",&cois); getchar();
     switch (cois)
@@ -441,9 +491,19 @@ void vegtal(){
 }
 
 void total(){
+
+    system("cls");
+
     printf("\n");
     char hoho[10];
     order = fopen("total.dat", "ab");
+
+    for (int i = 0; i < cd.totalitem; i++)
+    {
+        printf("%d. %s\n", i+1, cd.mennu[i]);
+    }
+    
+    printf("Total Price: %d\n",cd.sum);
 
 
     printf("Are you sure with your order ? (Y/N): ");
