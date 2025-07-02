@@ -29,6 +29,7 @@ void empdet();
 void viewrdr();
 void search();
 void deleted();
+void about();
 
 void loading(){
 
@@ -101,7 +102,7 @@ int main(){
         customer();
         break;
     case 3:
-        
+        about();
         break;
     
     default:
@@ -145,6 +146,7 @@ void customer(){
         break;
     
     default:
+        customer();
         break;
     }
 }
@@ -181,11 +183,13 @@ void nonveget(){
         break;
     
     default:
+        nonveget();
         break;
     }
 }
 
 void dchick(){
+
     
     printf("Quantity: ");
     scanf("%d", &quantity); getchar();
@@ -203,6 +207,7 @@ void dchick(){
         break;
     
     default:
+        dchick();
         break;
     }
 
@@ -225,6 +230,7 @@ void gchick(){
         break;
     
     default:
+        gchick();
         break;
     }
 }
@@ -246,6 +252,7 @@ void cbriya(){
         break;
     
     default:
+        cbriya();
         break;
     }
 }
@@ -267,6 +274,7 @@ void bever(){
         break;
     
     default:
+        bever();
         break;
     }
 }
@@ -314,7 +322,7 @@ void veget(){
             vegtal();
         break;
         default:
-            printf("See You!\n");
+            veget();
         break;
     }
 }
@@ -337,6 +345,7 @@ void burger(){
         break;
     
     default:
+        burger();
         break;
     }
 
@@ -359,6 +368,7 @@ void noodles(){
         break;
     
     default:
+        noodles();
         break;
     }
 }
@@ -380,6 +390,7 @@ void sandwich(){
         break;
     
     default:
+        sandwich();
         break;
     }
 }
@@ -401,6 +412,7 @@ void bever2(){
         break;
     
     default:
+        bever2();
         break;
     }
 }
@@ -423,59 +435,81 @@ void vegtal(){
         break;
     
     default:
+        vegtal();
         break;
     }
 }
 
 void total(){
     printf("\n");
+    char hoho[10];
     order = fopen("total.dat", "ab");
 
 
-    printf("Your total amount: %d\n", cd.sum);
+    printf("Are you sure with your order ? (Y/N): ");
+    fgets(hoho,sizeof(hoho),stdin);
+    hoho[strcspn(hoho,"\n")]='\0';
+
+    switch (stringtonum(hoho))
+    {
+    case YES:
+        printf("Your total amount: %d\n", cd.sum);
     
-    printf("Please give your contact details!\n");
-    printf("Name: ");
-    fgets(cd.nama,sizeof(cd.nama),stdin);
-    cd.nama[strcspn(cd.nama,"\n")]='\0';
+        printf("Please give your contact details!\n");
+        printf("Name: ");
+        fgets(cd.nama,sizeof(cd.nama),stdin);
+        cd.nama[strcspn(cd.nama,"\n")]='\0';
 
-    printf("Last name: ");
-    fgets(cd.lastnam,sizeof(cd.lastnam),stdin);
-    cd.lastnam[strcspn(cd.lastnam,"\n")]='\0';
+        printf("Last name: ");
+        fgets(cd.lastnam,sizeof(cd.lastnam),stdin);
+        cd.lastnam[strcspn(cd.lastnam,"\n")]='\0';
 
-    printf("Phone: ");
-    fgets(cd.phone,sizeof(cd.phone),stdin);
-    cd.phone[strcspn(cd.phone,"\n")]='\0';
+        printf("Phone: ");
+        fgets(cd.phone,sizeof(cd.phone),stdin);
+        cd.phone[strcspn(cd.phone,"\n")]='\0';
 
-    printf("Addres: ");
-    fgets(cd.add,sizeof(cd.add),stdin);
-    cd.add[strcspn(cd.add,"\n")]='\0';
+        printf("Addres: ");
+        fgets(cd.add,sizeof(cd.add),stdin);
+        cd.add[strcspn(cd.add,"\n")]='\0';
 
-    printf("Landmark: ");
-    fgets(cd.landmark,sizeof(cd.landmark),stdin);
-    cd.landmark[strcspn(cd.landmark,"\n")]='\0';
+        printf("Landmark: ");
+        fgets(cd.landmark,sizeof(cd.landmark),stdin);
+        cd.landmark[strcspn(cd.landmark,"\n")]='\0';
 
 
-    printf("\n\n");
-    printf("Your enter details are:\n");
-    printf("Name: %s\n", cd.nama);
-    printf("Last name: %s\n",cd.lastnam);
-    printf("Phone: %s\n",cd.phone);
-    printf("Addres: %s\n",cd.add);
-    printf("Landmark: %s\n",cd.landmark);
+        printf("\n\n");
+        printf("Your enter details are:\n");
+        printf("Name: %s\n", cd.nama);
+        printf("Last name: %s\n",cd.lastnam);
+        printf("Phone: %s\n",cd.phone);
+        printf("Addres: %s\n",cd.add);
+        printf("Landmark: %s\n",cd.landmark);
 
-    fwrite(&cd,sizeof(struct contact),1,order);
-    fclose(order);
+        fwrite(&cd,sizeof(struct contact),1,order);
+        fclose(order);
 
-    system("pause");
-    printf("\n");
-    divider();
-    printf("YOUR ORDER WILL BE AT YOUR HOME IN 30 MINUTES.\n");
-    printf("\t...HAPPY ORDERING...\n");
-    divider();
+        system("pause");
+        printf("\n");
+        divider();
+        printf("YOUR ORDER WILL BE AT YOUR HOME IN 30 MINUTES.\n");
+        printf("\t...HAPPY ORDERING...\n");
+        divider();
 
-    system("pause");
-    customer();
+        system("pause");
+        customer();
+        break;
+    case NO:
+        printf("Back to menu\n");
+        fclose(order);
+        system("pause");
+        customer();
+        break;
+    
+    default:
+        fclose(order);
+        printf("Error");
+        break;
+    }
 }
 
 
@@ -707,6 +741,7 @@ void search(){
         break;
     
     default:
+        search();
         break;
     }
 
@@ -760,4 +795,22 @@ void deleted(){
     printf("Press ENTER to main menu..");
     getchar();
     employemenu();
+}
+
+void about(){
+
+    system("cls");
+
+    divider();
+    printf("\tABOUT US\n");
+    divider();
+
+    printf("\n");
+    printf("\tKami adalah platform pemesanan digital berbasis online yang hadir untuk mempermudah Anda dalam\n\tmelakukan pemesanan berbagai produk dan layanan hanya melalui genggaman tangan.\n\tDengan sistem yang cepat, praktis, dan aman, kami menghubungkan pelanggan dengan penyedia layanan secara efisien\n\ttanpa batasan ruang dan waktu.\n\n");
+    printf("\tKami percaya bahwa era digital menuntut kemudahan dan kecepatan. Oleh karena itu, kami menghadirkan\n\tsolusi pemesanan yang terintegrasi, real-time, dan user-friendly, baik untuk kebutuhan sehari-hari, bisnis,\n\tmaupun acara khusus.\n\n");
+    printf("\tDengan dukungan teknologi terkini, layanan kami dapat diakses 24/7 dan didesain untuk memberikan\n\tpengalaman pengguna terbaik mulai dari proses pemesanan, konfirmasi, hingga pembayaran yang\n\ttransparan dan terpercaya.\n\n");
+    printf("\tMisi kami adalah menjadi jembatan digital yang menghubungkan kebutuhan pelanggan dengan berbagai\n\tlayanan berkualitas, serta terus berinovasi dalam menciptakan kemudahan dalam setiap transaksi online.\n\n");
+    system("pause");
+    main();
+
 }
