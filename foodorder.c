@@ -586,7 +586,7 @@ void employemenu(){
 
     printf("1. Add New Record\n");
     printf("2. Search Record\n");
-    printf("3. DeleteRecord\n");
+    printf("3. Delete Record\n");
     printf("4. View the Record\n");
     printf("5. View previous orders placed\n");
     printf("6. Back to menu\n");
@@ -872,5 +872,4 @@ void about(){
     printf("\tMisi kami adalah menjadi jembatan digital yang menghubungkan kebutuhan pelanggan dengan berbagai\n\tlayanan berkualitas, serta terus berinovasi dalam menciptakan kemudahan dalam setiap transaksi online.\n\n");
     system("pause");
     main();
-
 }
